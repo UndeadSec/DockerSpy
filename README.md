@@ -2,7 +2,7 @@
 Dockerspy searches for images on Docker Hub and extracts sensitive information such as authentication secrets, private keys, and more.
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/UndeadSec/DockerSpy/main/static/screenshot/sc.png"/>
+<img src="https://github.com/UndeadSec/DockerSpy/blob/main/screenshot/sc.png?raw=true"/>
 </p>
 
 ### What is Docker?
