@@ -13,7 +13,7 @@ Docker is an open-source platform that automates the deployment, scaling, and ma
 
 Docker Hub is a cloud-based repository where developers can store, share, and distribute container images. It serves as the largest library of container images, providing access to both official images created by Docker and community-contributed images. Docker Hub enables developers to easily find, download, and deploy pre-built images, facilitating rapid application development and deployment.
 
-### Why OSINT on DockerHub?
+### Why OSINT on Docker Hub?
 
 Open Source Intelligence (OSINT) on Docker Hub involves using publicly available information to gather insights and data from container images and repositories hosted on Docker Hub. This is particularly important for identifying exposed secrets for several reasons:
 
@@ -34,7 +34,7 @@ Utilizing OSINT on Docker Hub to find exposed secrets enables organizations to e
 
 ## How DockerSpy Works
 
-DockerSpy obtains information from DockerHub and uses regular expressions to inspect the content for sensitive information, such as secrets.
+DockerSpy obtains information from Docker Hub and uses regular expressions to inspect the content for sensitive information, such as secrets.
 
 ## Getting Started
 
