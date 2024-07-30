@@ -52,6 +52,12 @@ git clone https://github.com/UndeadSec/DockerSpy.git && cd DockerSpy && make
 dockerspy
 ```
 
+## Custom Configurations
+
+To customize DockerSpy configurations, edit the following files:
+- [Regular Expressions](src/configs/regex_patterns.json)
+- [Ignored File Extensions](src/configs/ignore_extensions.json)
+
 ## Disclaimer
 
 DockerSpy is intended for educational and research purposes only. Users are responsible for ensuring that their use of this tool complies with applicable laws and regulations.
@@ -85,3 +91,7 @@ Consider following me:
 ## License
 
 DockerSpy is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+### Thanks
+
+Special thanks to [@akaclandestine](https://x.com/akaclandestine) 
