@@ -29,6 +29,9 @@ Open Source Intelligence (OSINT) on Docker Hub involves using publicly available
 
 Utilizing OSINT on Docker Hub to find exposed secrets enables organizations to enhance their security measures, prevent data breaches, and ensure the confidentiality of sensitive information within their containerized applications.
 
+- [Thousands of images on Docker Hub leak auth secrets, private keys](https://www.bleepingcomputer.com/news/security/thousands-of-images-on-docker-hub-leak-auth-secrets-private-keys/)
+- [Docker Hub images found to expose secrets and private keys](https://www.threatdown.com/blog/docker-hub-images-found-to-expose-secrets-and-private-keys/)
+
 ## How DockerSpy Works
 
 DockerSpy obtains information from DockerHub and uses regular expressions to inspect the content for sensitive information, such as secrets.
@@ -65,8 +68,8 @@ I'm a passionate cyber threat intelligence pro who loves sharing insights and cr
 
 Consider following me:
 
-[![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/alissonmoretto)
 [![X](https://img.shields.io/badge/X-%23000000.svg?style=for-the-badge&logo=X&logoColor=white)](https://twitter.com/UndeadSec)
+[![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/alissonmoretto)
 [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/UndeadSec)
 
 ## TODO
