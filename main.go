@@ -275,14 +275,14 @@ func removeDir(dir string) error {
 func printBanner() {
 	banner := `
 ╭━━━━━━━━╮┏━╮╭━┓
-┃┈┈┈┈┈┈┈┈┃╰╮╰╯╭╯
+┃┈┈┈┈┈┈┈┈┃╰╮╰╯╭╯   v1.1
 ┃╰╯┈┈┈┈┈┈╰╮╰╮╭╯┈   DOCKERSPY by Alisson Moretto (UndeadSec)
 ┣━━╯┈┈┈┈┈┈╰━╯┃┈┈         AUTOMATED OSINT ON DOCKER HUB     
 ╰━━━━━━━━━━━━╯┈┈`
 	fmt.Println(color.New(color.FgGreen).Sprint(banner))
 }
 
-func fetchAllResults(url string) ([]struct {
+func fetchPaginatedResults(url string) ([]struct {
 	Name        string `json:"repo_name"`
 	Description string `json:"short_description"`
 	PullCount   int    `json:"pull_count"`
@@ -297,7 +297,12 @@ func fetchAllResults(url string) ([]struct {
 		IsOfficial  bool   `json:"is_official"`
 	}
 
+	count := 0
 	for {
+		if count >= 100 {
+			break
+		}
+
 		resp, err := http.Get(url)
 		if err != nil {
 			return nil, err
@@ -314,12 +319,17 @@ func fetchAllResults(url string) ([]struct {
 		}
 
 		allResults = append(allResults, searchResult.Results...)
+		count += len(searchResult.Results)
 
 		if searchResult.Next == "" {
 			break
 		}
 
 		url = searchResult.Next
+	}
+
+	if len(allResults) > 100 {
+		allResults = allResults[:100]
 	}
 
 	return allResults, nil
@@ -367,7 +377,7 @@ func main() {
 		params.Add("query", searchTerm)
 
 		searchURL := fmt.Sprintf("%s?%s", dockerHubURL, params.Encode())
-		results, err := fetchAllResults(searchURL)
+		results, err := fetchPaginatedResults(searchURL)
 		if err != nil {
 			fmt.Println(errorColor("\nError fetching search results:"), err)
 			continue
@@ -378,7 +388,7 @@ func main() {
 			fmt.Printf("\n%s - Name: %s\nDescription: %s\nStars: %d\nOfficial: %t", highlight(i+1), result.Name, result.Description, result.StarCount, result.IsOfficial)
 		}
 
-		fmt.Print(info("\nChoose a number to view repository tags (or 'cancel' to search again): "))
+		fmt.Print(info("\nChoose a number or enter the full name to view repository tags (or 'cancel' to search again): "))
 		scanner.Scan()
 		choice := scanner.Text()
 
@@ -386,13 +396,13 @@ func main() {
 			continue
 		}
 
+		var selectedRepo string
 		choiceNum, err := strconv.Atoi(choice)
-		if err != nil || choiceNum < 1 || choiceNum > len(results) {
-			fmt.Println(warning("\nInvalid choice. Please try again."))
-			continue
+		if err == nil && choiceNum >= 1 && choiceNum <= len(results) {
+			selectedRepo = results[choiceNum-1].Name
+		} else {
+			selectedRepo = choice
 		}
-
-		selectedRepo := results[choiceNum-1].Name
 
 		tagsURL := fmt.Sprintf("https://hub.docker.com/v2/repositories/%s/tags", selectedRepo)
 		resp, err := http.Get(tagsURL)
